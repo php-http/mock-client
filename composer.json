@@ -1,0 +1,36 @@
+{
+    "name": "php-http/mock-adapter",
+    "description": "Mock HTTP Adapter for testing",
+    "license": "MIT",
+    "keywords": ["boilerplate", "http", "adapter", "psr7", "mock"],
+    "homepage": "http://php-http.org",
+    "authors": [
+        {
+            "name": "David de Boer",
+            "email": "david@ddeboer.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "php-http/adapter": "^0.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.2",
+        "henrikbjorn/phpspec-code-coverage" : "^1.0"
+    },
+    "provide": {
+        "php-http/adapter-implementation": "0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Http\\Adapter\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
