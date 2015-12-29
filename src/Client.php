@@ -10,7 +10,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * HTTP client mock
+ * HTTP client mock.
  *
  * This mock is most useful in tests. It does not send requests but stores them
  * for later retrieval. Additionally, you can set an exception to test
@@ -46,7 +46,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Add exception that will be thrown
+     * Add exception that will be thrown.
      *
      * @param \Exception $exception
      */
@@ -56,7 +56,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Add response that will be returned
+     * Add response that will be returned.
      *
      * @param ResponseInterface $response
      */
@@ -66,7 +66,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Get requests that were sent
+     * Get requests that were sent.
      *
      * @return RequestInterface[]
      */
