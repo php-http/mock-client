@@ -1,10 +1,10 @@
 suites:
-  mock_adapter_suite:
-    namespace: Http\Adapter
-    psr4_prefix: Http\Adapter
+    mock_suite:
+        namespace: Http\Mock
+        psr4_prefix: Http\Mock
 formatter.name: pretty
 extensions:
-  - PhpSpec\Extension\CodeCoverageExtension
+    - PhpSpec\Extension\CodeCoverageExtension
 code_coverage:
-  format: clover
-  output: build/coverage.xml
+    format: clover
+    output: build/coverage.xml

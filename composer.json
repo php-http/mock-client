@@ -2,8 +2,8 @@
     "name": "php-http/mock-client",
     "description": "Mock HTTP client",
     "license": "MIT",
-    "keywords": ["boilerplate", "http", "client", "psr7", "mock"],
-    "homepage": "http://php-http.org",
+    "keywords": ["http", "client", "psr7", "mock"],
+    "homepage": "http://httplug.io",
     "authors": [
         {
             "name": "David de Boer",
@@ -16,7 +16,7 @@
         "php-http/discovery": "^0.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.2",
+        "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
     "provide": {
@@ -27,10 +27,9 @@
             "Http\\Mock\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Http\\Mock\\Tests\\": "tests/"
-        }
+    "scripts": {
+        "test": "vendor/bin/phpspec run",
+        "test-ci": "vendor/bin/phpspec run -c phpspec.yml.ci"
     },
     "extra": {
         "branch-alias": {
