@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "php-http/adapter": "^0.1"
+        "php-http/httplug": "^1.0@beta",
+        "php-http/discovery": "^0.5"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.2",
@@ -23,14 +24,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Http\\Adapter\\": "src/"
+            "Http\\Adapter\\Mock\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Http\\Adapter\\Mock\\Tests\\": "tests/"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"
         }
-    },
-    "prefer-stable": true,
-    "minimum-stability": "dev"
+    }
 }
