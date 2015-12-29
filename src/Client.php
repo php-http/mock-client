@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Adapter\Mock;
+namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
 use Http\Client\HttpAsyncClient;

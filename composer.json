@@ -1,8 +1,8 @@
 {
-    "name": "php-http/mock-adapter",
-    "description": "Mock HTTP Adapter for testing",
+    "name": "php-http/mock-client",
+    "description": "Mock HTTP client",
     "license": "MIT",
-    "keywords": ["boilerplate", "http", "adapter", "psr7", "mock"],
+    "keywords": ["boilerplate", "http", "client", "psr7", "mock"],
     "homepage": "http://php-http.org",
     "authors": [
         {
@@ -20,16 +20,16 @@
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
     "provide": {
-        "php-http/adapter-implementation": "0.1"
+        "php-http/client-implementation": "1.0"
     },
     "autoload": {
         "psr-4": {
-            "Http\\Adapter\\Mock\\": "src/"
+            "Http\\Mock\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Http\\Adapter\\Mock\\Tests\\": "tests/"
+            "Http\\Mock\\Tests\\": "tests/"
         }
     },
     "extra": {
