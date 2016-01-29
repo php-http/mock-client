@@ -12,9 +12,9 @@
     ],
     "require": {
         "php": ">=5.4",
-        "php-http/httplug": "^1.0@beta",
-        "php-http/client-common": "~0.1",
-        "php-http/discovery": "~0.5"
+        "php-http/httplug": "^1.0",
+        "php-http/client-common": "^1.0",
+        "php-http/discovery": "^0.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
@@ -36,5 +36,7 @@
         "branch-alias": {
             "dev-master": "0.1-dev"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "beta"
 }
