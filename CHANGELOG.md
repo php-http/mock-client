@@ -1,4 +1,18 @@
 # Change Log
 
 
-## Unreleased
+## 0.2.0 - 2016-02-01
+
+### Changed
+
+- Updated dependencies
+
+
+## 0.1.1 - 2015-12-31
+
+
+## 0.1.0 - 2015-12-29
+
+### Added
+
+- Initial release

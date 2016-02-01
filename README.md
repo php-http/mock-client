@@ -24,6 +24,11 @@ $ composer require php-http/mock-client
 Use this client in a testing framework.
 
 
+## Documentation
+
+Please see the [official documentation](http://docs.php-http.org).
+
+
 ## Testing
 
 ``` bash
@@ -33,19 +38,17 @@ $ composer test
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+Please see our [contributing guide](http://docs.php-http.org/en/latest/development/contributing.html).
 
 
 ## Security
 
-If you discover any security related issues, please contact us at [security@httplug.io](mailto:security@httplug.io)
-or [security@php-http.org](mailto:security@php-http.org).
+If you discover any security related issues, please contact us at [security@php-http.org](mailto:security@php-http.org).
 
 
 ## Credits
 
 Thanks to [David de Boer](https://github.com/ddeboer) for implementing this client.
-
 
 
 ## License
