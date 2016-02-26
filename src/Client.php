@@ -3,9 +3,11 @@
 namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
+use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\ResponseFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -22,9 +24,33 @@ class Client implements HttpClient, HttpAsyncClient
 {
     use HttpAsyncClientEmulator;
 
+    /**
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
+    /**
+     * @var RequestInterface[]
+     */
     private $requests = [];
+
+    /**
+     * @var ResponseInterface[]
+     */
     private $responses = [];
+
+    /**
+     * @var Exception[]
+     */
     private $exceptions = [];
+
+    /**
+     * @param ResponseFactory|null $responseFactory
+     */
+    public function __construct(ResponseFactory $responseFactory = null)
+    {
+        $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+    }
 
     /**
      * {@inheritdoc}
@@ -42,11 +68,11 @@ class Client implements HttpClient, HttpAsyncClient
         }
 
         // Return success response by default
-        return MessageFactoryDiscovery::find()->createResponse();
+        return $this->responseFactory->createResponse();
     }
 
     /**
-     * Add exception that will be thrown.
+     * Adds an exception that will be thrown.
      *
      * @param \Exception $exception
      */
@@ -56,7 +82,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Add response that will be returned.
+     * Adds a response that will be returned.
      *
      * @param ResponseInterface $response
      */
@@ -66,7 +92,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Get requests that were sent.
+     * Returns requests that were sent.
      *
      * @return RequestInterface[]
      */
