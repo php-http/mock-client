@@ -1,6 +1,17 @@
 # Change Log
 
 
+## 0.3.0 - 2016-02-26
+
+### Added
+
+- Support for custom MessageFactory
+
+### Changed
+
+- Updated dependencies
+
+
 ## 0.2.0 - 2016-02-01
 
 ### Changed
