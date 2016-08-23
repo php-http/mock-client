@@ -3,9 +3,12 @@ preset: symfony
 finder:
     exclude:
         - "spec"
-        - "tests"
     path:
         - "src"
+        - "tests"
 
 enabled:
     - short_array_syntax
+
+disabled:
+    - phpdoc_annotation_without_dot # This is still buggy: https://github.com/symfony/symfony/pull/19198
