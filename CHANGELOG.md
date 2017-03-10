@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.0.0 - 2017-03-10
+
+Stable release with no changes since 0.3
 
 ## 0.3.0 - 2016-02-26
 
