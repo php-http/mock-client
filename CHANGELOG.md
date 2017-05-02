@@ -1,8 +1,17 @@
 # Change Log
 
+
+## 1.0.1 - 2017-05-02
+
+### Fixed
+
+- `php-http/client-common` minimum dependency
+
+
 ## 1.0.0 - 2017-03-10
 
 Stable release with no changes since 0.3
+
 
 ## 0.3.0 - 2016-02-26
 
