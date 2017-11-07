@@ -40,9 +40,19 @@ class Client implements HttpClient, HttpAsyncClient
     private $responses = [];
 
     /**
+     * @var ResponseInterface|null
+     */
+    private $defaultResponse;
+
+    /**
      * @var Exception[]
      */
     private $exceptions = [];
+
+    /**
+     * @var Exception|null
+     */
+    private $defaultException;
 
     /**
      * @param ResponseFactory|null $responseFactory
@@ -67,6 +77,14 @@ class Client implements HttpClient, HttpAsyncClient
             return array_shift($this->responses);
         }
 
+        if ($this->defaultException) {
+            throw $this->defaultException;
+        }
+
+        if ($this->defaultResponse) {
+            return $this->defaultResponse;
+        }
+
         // Return success response by default
         return $this->responseFactory->createResponse();
     }
@@ -82,6 +100,18 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
+     * Sets the default exception to throw when the list of added exceptions and responses is exhausted.
+     *
+     * If both a default exception and a default response are set, the exception will be thrown.
+     *
+     * @param \Exception|null $defaultException
+     */
+    public function setDefaultException(\Exception $defaultException = null)
+    {
+        $this->defaultException = $defaultException;
+    }
+
+    /**
      * Adds a response that will be returned.
      *
      * @param ResponseInterface $response
@@ -89,6 +119,16 @@ class Client implements HttpClient, HttpAsyncClient
     public function addResponse(ResponseInterface $response)
     {
         $this->responses[] = $response;
+    }
+
+    /**
+     * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
+     *
+     * @param ResponseInterface|null $defaultResponse
+     */
+    public function setDefaultResponse(ResponseInterface $defaultResponse = null)
+    {
+        $this->defaultResponse = $defaultResponse;
     }
 
     /**
