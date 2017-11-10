@@ -1,5 +1,9 @@
 # Change Log
 
+### Added
+
+- Default response functionality
+- Default exception functionality
 
 ## 1.0.1 - 2017-05-02
 

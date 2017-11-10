@@ -36,9 +36,23 @@ class ClientSpec extends ObjectBehavior
         $this->sendRequest($request)->shouldReturn($response);
     }
 
+    function it_returns_the_default_response_for_a_request(RequestInterface $request, ResponseInterface $response)
+    {
+        $this->setDefaultResponse($response);
+
+        $this->sendRequest($request)->shouldReturn($response);
+    }
+
     function it_throws_an_exception_for_a_request(RequestInterface $request)
     {
         $this->addException(new \Exception());
+
+        $this->shouldThrow('Exception')->duringSendRequest($request);
+    }
+
+    function it_throws_the_default_exception_for_a_request(RequestInterface $request)
+    {
+        $this->setDefaultException(new \Exception());
 
         $this->shouldThrow('Exception')->duringSendRequest($request);
     }
