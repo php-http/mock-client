@@ -4,8 +4,6 @@ namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
 use Http\Client\Exception;
-use Http\Client\HttpAsyncClient;
-use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\ResponseFactory;
 use Psr\Http\Message\RequestInterface;
@@ -20,39 +18,39 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-class Client implements HttpClient, HttpAsyncClient
+class Client implements ClientInterface
 {
     use HttpAsyncClientEmulator;
 
     /**
      * @var ResponseFactory
      */
-    private $responseFactory;
+    protected $responseFactory;
 
     /**
      * @var RequestInterface[]
      */
-    private $requests = [];
+    protected $requests = [];
 
     /**
      * @var ResponseInterface[]
      */
-    private $responses = [];
+    protected $responses = [];
 
     /**
      * @var ResponseInterface|null
      */
-    private $defaultResponse;
+    protected $defaultResponse;
 
     /**
      * @var Exception[]
      */
-    private $exceptions = [];
+    protected $exceptions = [];
 
     /**
      * @var Exception|null
      */
-    private $defaultException;
+    protected $defaultException;
 
     /**
      * @param ResponseFactory|null $responseFactory
@@ -90,9 +88,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Adds an exception that will be thrown.
-     *
-     * @param \Exception $exception
+     * {@inheritdoc}
      */
     public function addException(\Exception $exception)
     {
@@ -100,11 +96,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Sets the default exception to throw when the list of added exceptions and responses is exhausted.
-     *
-     * If both a default exception and a default response are set, the exception will be thrown.
-     *
-     * @param \Exception|null $defaultException
+     * {@inheritdoc}
      */
     public function setDefaultException(\Exception $defaultException = null)
     {
@@ -112,9 +104,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Adds a response that will be returned.
-     *
-     * @param ResponseInterface $response
+     * {@inheritdoc}
      */
     public function addResponse(ResponseInterface $response)
     {
@@ -122,9 +112,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
-     *
-     * @param ResponseInterface|null $defaultResponse
+     * {@inheritdoc}
      */
     public function setDefaultResponse(ResponseInterface $defaultResponse = null)
     {
@@ -132,9 +120,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Returns requests that were sent.
-     *
-     * @return RequestInterface[]
+     * {@inheritdoc}
      */
     public function getRequests()
     {
