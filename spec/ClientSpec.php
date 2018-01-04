@@ -66,4 +66,11 @@ class ClientSpec extends ObjectBehavior
 
         $this->sendRequest($request)->shouldReturn($response);
     }
+
+    function it_returns_the_last_request(RequestInterface $request)
+    {
+        $this->sendRequest($request);
+
+        $this->getLastRequest()->shouldReturn($request);
+    }
 }

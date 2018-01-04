@@ -140,4 +140,12 @@ class Client implements HttpClient, HttpAsyncClient
     {
         return $this->requests;
     }
+
+    /**
+     * @return RequestInterface|false
+     */
+    public function getLastRequest()
+    {
+        return end($this->requests);
+    }
 }
