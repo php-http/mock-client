@@ -1,10 +1,13 @@
 # Change Log
 
+## 1.1.0 - 2018-01-08
+
 ### Added
 
 - Default response functionality
 - Default exception functionality
 - `getLastRequest` method
+
 
 ## 1.0.1 - 2017-05-02
 
