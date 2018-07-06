@@ -135,4 +135,13 @@ class Client implements HttpClient, HttpAsyncClient
     {
         return end($this->requests);
     }
+
+    public function reset()
+    {
+        $this->responses = [];
+        $this->exceptions = [];
+        $this->requests = [];
+        $this->setDefaultException();
+        $this->setDefaultResponse();
+    }
 }
