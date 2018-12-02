@@ -2,7 +2,10 @@
 
 namespace spec\Http\Mock;
 
+use Http\Client\HttpAsyncClient;
+use Http\Client\HttpClient;
 use Http\Message\ResponseFactory;
+use Http\Mock\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
@@ -16,17 +19,17 @@ class ClientSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Mock\Client');
+        $this->shouldHaveType(Client::class);
     }
 
     function it_is_an_http_client()
     {
-        $this->shouldImplement('Http\Client\HttpClient');
+        $this->shouldImplement(HttpClient::class);
     }
 
     function it_is_an_async_http_client()
     {
-        $this->shouldImplement('Http\Client\HttpAsyncClient');
+        $this->shouldImplement(HttpAsyncClient::class);
     }
 
     function it_returns_a_response_for_a_request(RequestInterface $request, ResponseInterface $response)
@@ -67,10 +70,18 @@ class ClientSpec extends ObjectBehavior
         $this->sendRequest($request)->shouldReturn($response);
     }
 
-    function it_returns_the_last_request(RequestInterface $request)
+    function it_returns_the_last_request(RequestInterface $request, ResponseInterface $response)
     {
+        // we need to set something that sendRequest can return.
+        $this->addResponse($response);
+
         $this->sendRequest($request);
 
         $this->getLastRequest()->shouldReturn($request);
+    }
+
+    function it_returns_null_when_there_is_no_last_request()
+    {
+        $this->getLastRequest()->shouldReturn(null);
     }
 }
