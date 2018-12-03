@@ -29,7 +29,7 @@ testing code that depends on a HTTPlug client to send requests and receive respo
 
 ## Documentation
 
-Please see the [official documentation](http://docs.php-http.org/en/latest/clients/mock-client.html).
+Please see the [mock client](http://docs.php-http.org/en/latest/clients/mock-client.html) section in the [official documentation](http://docs.php-http.org).
 
 
 ## Testing
