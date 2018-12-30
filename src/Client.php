@@ -3,6 +3,7 @@
 namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
+use Http\Client\Common\VersionBridgeClient;
 use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -12,17 +13,17 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * HTTP client mock.
+ * An implementation of the HTTP client that is useful for automated tests.
  *
- * This mock is most useful in tests. It does not send requests but stores them
- * for later retrieval. Additionally, you can set an exception to test
- * exception handling.
+ * This mock does not send requests but stores them for later retrieval.
+ * You can configure the mock with responses to return and/or exceptions to throw.
  *
  * @author David de Boer <david@ddeboer.nl>
  */
 class Client implements HttpClient, HttpAsyncClient
 {
     use HttpAsyncClientEmulator;
+    use VersionBridgeClient;
 
     /**
      * @var ResponseFactory
@@ -54,9 +55,6 @@ class Client implements HttpClient, HttpAsyncClient
      */
     private $defaultException;
 
-    /**
-     * @param ResponseFactory|null $responseFactory
-     */
     public function __construct(ResponseFactory $responseFactory = null)
     {
         $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
@@ -65,7 +63,7 @@ class Client implements HttpClient, HttpAsyncClient
     /**
      * {@inheritdoc}
      */
-    public function sendRequest(RequestInterface $request)
+    public function doSendRequest(RequestInterface $request)
     {
         $this->requests[] = $request;
 
@@ -91,8 +89,6 @@ class Client implements HttpClient, HttpAsyncClient
 
     /**
      * Adds an exception that will be thrown.
-     *
-     * @param \Exception $exception
      */
     public function addException(\Exception $exception)
     {
@@ -103,8 +99,6 @@ class Client implements HttpClient, HttpAsyncClient
      * Sets the default exception to throw when the list of added exceptions and responses is exhausted.
      *
      * If both a default exception and a default response are set, the exception will be thrown.
-     *
-     * @param \Exception|null $defaultException
      */
     public function setDefaultException(\Exception $defaultException = null)
     {
@@ -112,9 +106,7 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * Adds a response that will be returned.
-     *
-     * @param ResponseInterface $response
+     * Adds a response that will be returned in first in first out order.
      */
     public function addResponse(ResponseInterface $response)
     {
@@ -123,8 +115,6 @@ class Client implements HttpClient, HttpAsyncClient
 
     /**
      * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
-     *
-     * @param ResponseInterface|null $defaultResponse
      */
     public function setDefaultResponse(ResponseInterface $defaultResponse = null)
     {
@@ -141,9 +131,6 @@ class Client implements HttpClient, HttpAsyncClient
         return $this->requests;
     }
 
-    /**
-     * @return RequestInterface|false
-     */
     public function getLastRequest()
     {
         return end($this->requests);

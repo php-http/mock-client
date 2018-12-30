@@ -20,13 +20,15 @@ env:
 
 branches:
     except:
-        - /^analysis-.*$/
+        - /^patch-.*$/
 
 matrix:
     fast_finish: true
     include:
-        - php: 5.5
+        - php: 7.1
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci"
+        - php: 5.5
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
