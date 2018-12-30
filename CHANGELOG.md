@@ -5,6 +5,7 @@
 ### Added
 
 - Support for HTTPlug 2.0.
+- Support for php-http/client-common 2.0.
 
 ## 1.1.0 - 2018-01-08
 
