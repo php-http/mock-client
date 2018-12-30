@@ -3,7 +3,6 @@
 namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
-use Http\Client\Common\VersionBridgeClient;
 use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -23,7 +22,6 @@ use Psr\Http\Message\ResponseInterface;
 class Client implements HttpClient, HttpAsyncClient
 {
     use HttpAsyncClientEmulator;
-    use VersionBridgeClient;
 
     /**
      * @var ResponseFactory
@@ -61,9 +59,15 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * {@inheritdoc}
+     * This will in order:
+     *
+     * - Throw the next exception in the list and advance
+     * - Return the next response in the list and advance
+     * - Throw the default exception if set (forever)
+     * - Return the default response if set (forever)
+     * - Create a new empty response with the response factory
      */
-    public function doSendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): ResponseInterface
     {
         $this->requests[] = $request;
 
@@ -100,7 +104,7 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * If both a default exception and a default response are set, the exception will be thrown.
      */
-    public function setDefaultException(\Exception $defaultException = null)
+    public function setDefaultException(?\Exception $defaultException)
     {
         $this->defaultException = $defaultException;
     }
@@ -116,7 +120,7 @@ class Client implements HttpClient, HttpAsyncClient
     /**
      * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
      */
-    public function setDefaultResponse(ResponseInterface $defaultResponse = null)
+    public function setDefaultResponse(?ResponseInterface $defaultResponse)
     {
         $this->defaultResponse = $defaultResponse;
     }
@@ -126,13 +130,13 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * @return RequestInterface[]
      */
-    public function getRequests()
+    public function getRequests(): array
     {
         return $this->requests;
     }
 
-    public function getLastRequest()
+    public function getLastRequest(): ?RequestInterface
     {
-        return end($this->requests);
+        return end($this->requests) ?: null;
     }
 }
