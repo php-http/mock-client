@@ -1,10 +1,10 @@
 # Change Log
 
-## 2.0.0 - unreleased
+## 1.2.0 - unreleased
 
-### Changed
+### Added
 
-- Client::getLastRequest returns `null` instead of `false` when on requests have been recorded yet.
+- Support for HTTPlug 2.0.
 
 ## 1.1.0 - 2018-01-08
 

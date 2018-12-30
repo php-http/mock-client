@@ -3,6 +3,7 @@
 namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
+use Http\Client\Common\VersionBridgeClient;
 use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -22,6 +23,7 @@ use Psr\Http\Message\ResponseInterface;
 class Client implements HttpClient, HttpAsyncClient
 {
     use HttpAsyncClientEmulator;
+    use VersionBridgeClient;
 
     /**
      * @var ResponseFactory
@@ -61,7 +63,7 @@ class Client implements HttpClient, HttpAsyncClient
     /**
      * {@inheritdoc}
      */
-    public function sendRequest(RequestInterface $request): ResponseInterface
+    public function doSendRequest(RequestInterface $request)
     {
         $this->requests[] = $request;
 
@@ -98,7 +100,7 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * If both a default exception and a default response are set, the exception will be thrown.
      */
-    public function setDefaultException(?\Exception $defaultException)
+    public function setDefaultException(\Exception $defaultException = null)
     {
         $this->defaultException = $defaultException;
     }
@@ -114,7 +116,7 @@ class Client implements HttpClient, HttpAsyncClient
     /**
      * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
      */
-    public function setDefaultResponse(?ResponseInterface $defaultResponse)
+    public function setDefaultResponse(ResponseInterface $defaultResponse = null)
     {
         $this->defaultResponse = $defaultResponse;
     }
@@ -124,13 +126,13 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * @return RequestInterface[]
      */
-    public function getRequests(): array
+    public function getRequests()
     {
         return $this->requests;
     }
 
-    public function getLastRequest(): ?RequestInterface
+    public function getLastRequest()
     {
-        return end($this->requests) ?: null;
+        return end($this->requests);
     }
 }
