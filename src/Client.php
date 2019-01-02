@@ -92,6 +92,9 @@ class Client implements HttpClient, HttpAsyncClient
      */
     public function addException(\Exception $exception)
     {
+        if (!$exception instanceof Exception) {
+            @trigger_error('Clients may only throw exceptions of type '.Exception::class.'. Setting an exception of class '.get_class($exception).' will not be possible anymore in the future', E_USER_DEPRECATED);
+        }
         $this->exceptions[] = $exception;
     }
 
@@ -102,6 +105,9 @@ class Client implements HttpClient, HttpAsyncClient
      */
     public function setDefaultException(\Exception $defaultException = null)
     {
+        if (!$defaultException instanceof Exception) {
+            @trigger_error('Clients may only throw exceptions of type '.Exception::class.'. Setting an exception of class '.get_class($defaultException).' will not be possible anymore in the future', E_USER_DEPRECATED);
+        }
         $this->defaultException = $defaultException;
     }
 
