@@ -84,4 +84,26 @@ class ClientSpec extends ObjectBehavior
     {
         $this->getLastRequest()->shouldReturn(false);
     }
+
+    function it_reset(
+        ResponseFactory $responseFactory,
+        RequestInterface $request,
+        ResponseInterface $response,
+        ResponseInterface $newResponse
+    ) {
+        $this->addResponse($response);
+        $this->setDefaultResponse($response);
+        $this->addException(new \Exception());
+        $this->setDefaultException(new \Exception());
+
+        $responseFactory->createResponse()->willReturn($newResponse);
+
+        $this->reset();
+
+        $this->sendRequest($request)->shouldReturn($newResponse);
+
+        $this->reset();
+
+        $this->getRequests()->shouldReturn([]);
+    }
 }
