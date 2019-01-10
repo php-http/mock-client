@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": "^5.5 || ^7.0",
-        "php-http/httplug": "^1.0 || ^2.0",
-        "php-http/client-common": "^1.9 || ^2.0",
+        "php": "^7.1",
+        "php-http/httplug": "^2.0",
+        "php-http/client-common": "^2.0",
         "php-http/discovery": "^1.0",
         "php-http/message-factory": "^1.0"
     },
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "prefer-stable": true,

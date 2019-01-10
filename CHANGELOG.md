@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.0 - unreleased
+
+### Changed
+
+- Client::getLastRequest returns `null` instead of `false` when on requests have been recorded yet.
+
 ## 1.2.0 - unreleased
 
 ### Added

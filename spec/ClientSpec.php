@@ -80,9 +80,9 @@ class ClientSpec extends ObjectBehavior
         $this->getLastRequest()->shouldReturn($request);
     }
 
-    function it_returns_false_when_there_is_no_last_request()
+    function it_returns_null_when_there_is_no_last_request()
     {
-        $this->getLastRequest()->shouldReturn(false);
+        $this->getLastRequest()->shouldReturn(null);
     }
 
     function it_reset(
