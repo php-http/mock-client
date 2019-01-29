@@ -78,7 +78,7 @@ class Client implements HttpClient, HttpAsyncClient
             $callable = $result['callable'];
 
             /**
-             * @var RequestMatcher $matcher
+             * @var $matcher RequestMatcher
              * @var ResponseInterface|Exception $result
              */
             if ($matcher->matches($request)) {
