@@ -74,13 +74,16 @@ class Client implements HttpClient, HttpAsyncClient
         $this->requests[] = $request;
 
         foreach ($this->conditionalResults as $result) {
+            /**
+             * @var RequestMatcher
+             */
             $matcher = $result['matcher'];
-            $callable = $result['callable'];
 
             /**
-             * @var $matcher RequestMatcher
-             * @var ResponseInterface|Exception $result
+             * @var callable
              */
+            $callable = $result['callable'];
+
             if ($matcher->matches($request)) {
                 return $callable($request);
             }
