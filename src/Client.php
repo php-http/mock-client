@@ -107,6 +107,10 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
+     * Adds an exception to be thrown or response to be returned if the request matcher matches.
+     *
+     * For more complex logic, pass a callable which should take the request and return a response or exception
+     *
      * @param RequestMatcher                        $requestMatcher
      * @param ResponseInterface|\Exception|callable $result
      */

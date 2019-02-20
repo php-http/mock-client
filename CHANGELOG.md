@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.1 - 2019-02-20
+
+### Added
+
+- Conditional mock functionality
+
 ## 1.2.0 - 2019-01-19
 
 ### Added
