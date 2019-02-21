@@ -4,6 +4,7 @@ namespace spec\Http\Mock;
 
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
+use Http\Message\RequestMatcher;
 use Http\Message\ResponseFactory;
 use Http\Mock\Client;
 use Psr\Http\Message\RequestInterface;
@@ -105,5 +106,52 @@ class ClientSpec extends ObjectBehavior
         $this->reset();
 
         $this->getRequests()->shouldReturn([]);
+    }
+    function it_returns_response_if_request_matcher_matches(
+        RequestMatcher $matcher,
+        RequestInterface $request,
+        ResponseInterface $response
+    ) {
+        $matcher->matches($request)->willReturn(true);
+        $this->on($matcher, $response);
+        $this->sendRequest($request)->shouldReturn($response);
+    }
+
+    function it_throws_exception_if_request_matcher_matches(
+        RequestMatcher $matcher,
+        RequestInterface $request
+    ) {
+        $matcher->matches($request)->willReturn(true);
+        $this->on($matcher, new \Exception());
+        $this->shouldThrow('Exception')->duringSendRequest($request);
+    }
+
+    function it_skips_conditional_response_if_matcher_returns_false(
+        RequestMatcher $matcher,
+        RequestInterface $request,
+        ResponseInterface $expectedResponse,
+        ResponseInterface $skippedResponse
+    ) {
+        $matcher->matches($request)->willReturn(false);
+        $this->on($matcher, $skippedResponse);
+        $this->addResponse($expectedResponse);
+        $this->sendRequest($request)->shouldReturn($expectedResponse);
+    }
+
+    function it_calls_callable_with_request_as_argument_when_matcher_returns_true(
+        RequestMatcher $matcher,
+        RequestInterface $request,
+        ResponseInterface $response
+    ) {
+        $matcher->matches($request)->willReturn(true);
+
+        $this->on(
+            $matcher,
+            function(RequestInterface $request) use ($response) {
+                return $response->getWrappedObject();
+            }
+        );
+
+        $this->sendRequest($request)->shouldReturn($response);
     }
 }

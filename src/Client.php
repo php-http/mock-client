@@ -8,7 +8,9 @@ use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\RequestMatcher;
 use Http\Message\ResponseFactory;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -29,6 +31,11 @@ class Client implements HttpClient, HttpAsyncClient
      * @var ResponseFactory
      */
     private $responseFactory;
+
+    /**
+     * @var array
+     */
+    private $conditionalResults = [];
 
     /**
      * @var RequestInterface[]
@@ -67,6 +74,22 @@ class Client implements HttpClient, HttpAsyncClient
     {
         $this->requests[] = $request;
 
+        foreach ($this->conditionalResults as $result) {
+            /**
+             * @var RequestMatcher
+             */
+            $matcher = $result['matcher'];
+
+            /**
+             * @var callable
+             */
+            $callable = $result['callable'];
+
+            if ($matcher->matches($request)) {
+                return $callable($request);
+            }
+        }
+
         if (count($this->exceptions) > 0) {
             throw array_shift($this->exceptions);
         }
@@ -85,6 +108,46 @@ class Client implements HttpClient, HttpAsyncClient
 
         // Return success response by default
         return $this->responseFactory->createResponse();
+    }
+
+    /**
+     * Adds an exception to be thrown or response to be returned if the request
+     * matcher matches.
+     *
+     * For more complex logic, pass a callable as $result. The method is given
+     * the request and MUST either return a ResponseInterface or throw an
+     * exception that implements the PSR-18 / HTTPlug exception interface.
+     *
+     * @param ResponseInterface|Exception|ClientExceptionInterface|callable $result
+     */
+    public function on(RequestMatcher $requestMatcher, $result)
+    {
+        $callable = null;
+
+        switch (true) {
+            case is_callable($result):
+                $callable = $result;
+
+                break;
+            case $result instanceof ResponseInterface:
+                $callable = function () use ($result) {
+                    return $result;
+                };
+
+                break;
+            case $result instanceof \Exception:
+                $callable = function () use ($result) {
+                    throw $result;
+                };
+
+                break;
+            default:
+                throw new \InvalidArgumentException('Result must be either a response, an exception, or a callable');
+        }
+        $this->conditionalResults[] = [
+            'matcher' => $requestMatcher,
+            'callable' => $callable,
+        ];
     }
 
     /**
