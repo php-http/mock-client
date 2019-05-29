@@ -12,14 +12,14 @@
     ],
     "require": {
         "php": "^5.5 || ^7.0",
-        "php-http/httplug": "^1.0 || ^2.0",
         "php-http/client-common": "^1.9 || ^2.0",
         "php-http/discovery": "^1.0",
+        "php-http/httplug": "^1.0 || ^2.0",
         "php-http/message-factory": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
-        "henrikbjorn/phpspec-code-coverage" : "^1.0"
+        "henrikbjorn/phpspec-code-coverage" : "^1.0",
+        "phpspec/phpspec": "^2.4"
     },
     "provide": {
         "php-http/async-client-implementation": "1.0",
@@ -40,5 +40,8 @@
         }
     },
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    }
 }
