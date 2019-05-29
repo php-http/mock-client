@@ -1,9 +1,14 @@
 {
     "name": "php-http/mock-client",
     "description": "Mock HTTP client",
-    "license": "MIT",
-    "keywords": ["http", "client", "psr7", "mock"],
+    "keywords": [
+        "http",
+        "client",
+        "psr7",
+        "mock"
+    ],
     "homepage": "http://httplug.io",
+    "license": "MIT",
     "authors": [
         {
             "name": "David de Boer",
@@ -17,31 +22,31 @@
         "php-http/httplug": "^1.0 || ^2.0",
         "php-http/message-factory": "^1.0"
     },
-    "require-dev": {
-        "henrikbjorn/phpspec-code-coverage" : "^1.0",
-        "phpspec/phpspec": "^2.4"
-    },
     "provide": {
         "php-http/async-client-implementation": "1.0",
         "php-http/client-implementation": "1.0"
     },
-    "autoload": {
-        "psr-4": {
-            "Http\\Mock\\": "src/"
-        }
+    "require-dev": {
+        "henrikbjorn/phpspec-code-coverage": "^1.0",
+        "phpspec/phpspec": "^2.4"
     },
-    "scripts": {
-        "test": "vendor/bin/phpspec run",
-        "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.3-dev"
         }
     },
-    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Http\\Mock\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
-    "config": {
-        "sort-packages": true
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpspec run",
+        "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
     }
 }
