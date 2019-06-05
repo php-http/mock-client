@@ -139,22 +139,23 @@ class Client implements HttpClient, HttpAsyncClient
      */
     private static function makeCallable($result)
     {
-        switch (true) {
-            case is_callable($result):
-                return $result;
-            case $result instanceof ResponseInterface:
-                return function () use ($result) {
-                    return $result;
-                };
-
-                break;
-            case $result instanceof \Exception:
-                return function () use ($result) {
-                    throw $result;
-                };
-            default:
-                throw new \InvalidArgumentException('Result must be either a response, an exception, or a callable');
+        if (is_callable($result)) {
+            return $result;
         }
+
+        if ($result instanceof ResponseInterface) {
+            return function () use ($result) {
+                return $result;
+            };
+        }
+
+        if ($result instanceof \Exception) {
+            return function () use ($result) {
+                throw $result;
+            };
+        }
+
+        throw new \InvalidArgumentException('Result must be either a response, an exception, or a callable');
     }
 
     /**
