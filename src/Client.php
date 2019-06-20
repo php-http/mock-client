@@ -122,32 +122,40 @@ class Client implements HttpClient, HttpAsyncClient
      */
     public function on(RequestMatcher $requestMatcher, $result)
     {
-        $callable = null;
+        $callable = self::makeCallable($result);
 
-        switch (true) {
-            case is_callable($result):
-                $callable = $result;
-
-                break;
-            case $result instanceof ResponseInterface:
-                $callable = function () use ($result) {
-                    return $result;
-                };
-
-                break;
-            case $result instanceof \Exception:
-                $callable = function () use ($result) {
-                    throw $result;
-                };
-
-                break;
-            default:
-                throw new \InvalidArgumentException('Result must be either a response, an exception, or a callable');
-        }
         $this->conditionalResults[] = [
             'matcher' => $requestMatcher,
             'callable' => $callable,
         ];
+    }
+
+    /**
+     * @param ResponseInterface|Exception|ClientExceptionInterface|callable $result
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return callable
+     */
+    private static function makeCallable($result)
+    {
+        if (is_callable($result)) {
+            return $result;
+        }
+
+        if ($result instanceof ResponseInterface) {
+            return function () use ($result) {
+                return $result;
+            };
+        }
+
+        if ($result instanceof \Exception) {
+            return function () use ($result) {
+                throw $result;
+            };
+        }
+
+        throw new \InvalidArgumentException('Result must be either a response, an exception, or a callable');
     }
 
     /**
