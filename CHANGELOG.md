@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.1 - 2019-11-06
+
+### Fixed
+
+- `reset()` also resets `conditionalResults`
+
 ## 1.3.0 - 2019-02-21
 
 ### Added
