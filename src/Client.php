@@ -215,6 +215,7 @@ class Client implements HttpClient, HttpAsyncClient
 
     public function reset()
     {
+        $this->conditionalResults = [];
         $this->responses = [];
         $this->exceptions = [];
         $this->requests = [];
