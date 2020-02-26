@@ -2,6 +2,10 @@
 
 ## 1.4.0 -
 
+### Fixed
+- `reset()` should not trigger `setDefaultException` error condition
+
+### Breaking
 - drop support for PHP 5 and 7.0
 
 ## 1.3.1 - 2019-11-06
