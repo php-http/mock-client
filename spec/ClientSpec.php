@@ -157,6 +157,6 @@ class ClientSpec extends ObjectBehavior
     }
 }
 
-class Exception implements ClientExceptionInterface
+class Exception extends \Exception implements ClientExceptionInterface
 {
 }
