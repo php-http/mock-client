@@ -1,12 +1,19 @@
 # Change Log
 
-## 1.4.0 -
+## 1.4.0 - 2020-07-02
+
+### Added
+
+- Support for the PSR-17 response factory
+
+### Changed
+
+- Drop support for PHP 5 and 7.0
+- Consitent implementation of union type checking
 
 ### Fixed
-- `reset()` should not trigger `setDefaultException` error condition
 
-### Breaking
-- drop support for PHP 5 and 7.0
+- `reset()` should not trigger `setDefaultException` error condition
 
 ## 1.3.1 - 2019-11-06
 
