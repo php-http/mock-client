@@ -7,6 +7,7 @@ use Http\Client\HttpClient;
 use Http\Message\RequestMatcher;
 use Http\Message\ResponseFactory;
 use Http\Mock\Client;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
@@ -49,16 +50,16 @@ class ClientSpec extends ObjectBehavior
 
     function it_throws_an_exception_for_a_request(RequestInterface $request)
     {
-        $this->addException(new \Exception());
+        $this->addException(new Exception());
 
-        $this->shouldThrow('Exception')->duringSendRequest($request);
+        $this->shouldThrow(Exception::class)->duringSendRequest($request);
     }
 
     function it_throws_the_default_exception_for_a_request(RequestInterface $request)
     {
-        $this->setDefaultException(new \Exception());
+        $this->setDefaultException(new Exception());
 
-        $this->shouldThrow('Exception')->duringSendRequest($request);
+        $this->shouldThrow(Exception::class)->duringSendRequest($request);
     }
 
     function it_creates_an_empty_response_when_none_is_added(
@@ -94,8 +95,8 @@ class ClientSpec extends ObjectBehavior
     ) {
         $this->addResponse($response);
         $this->setDefaultResponse($response);
-        $this->addException(new \Exception());
-        $this->setDefaultException(new \Exception());
+        $this->addException(new Exception());
+        $this->setDefaultException(new Exception());
 
         $responseFactory->createResponse()->willReturn($newResponse);
 
@@ -122,8 +123,8 @@ class ClientSpec extends ObjectBehavior
         RequestInterface $request
     ) {
         $matcher->matches($request)->willReturn(true);
-        $this->on($matcher, new \Exception());
-        $this->shouldThrow('Exception')->duringSendRequest($request);
+        $this->on($matcher, new Exception());
+        $this->shouldThrow(Exception::class)->duringSendRequest($request);
     }
 
     function it_skips_conditional_response_if_matcher_returns_false(
@@ -154,4 +155,8 @@ class ClientSpec extends ObjectBehavior
 
         $this->sendRequest($request)->shouldReturn($response);
     }
+}
+
+class Exception implements ClientExceptionInterface
+{
 }
