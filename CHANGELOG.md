@@ -1,5 +1,12 @@
 # Change Log
 
+
+## 1.4.1 - 2020-07-14
+
+### Fixed
+
+- Support PHP 7.4 and 8.0
+
 ## 1.4.0 - 2020-07-02
 
 ### Added
