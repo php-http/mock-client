@@ -7,7 +7,7 @@ use Http\Client\HttpClient;
 use Http\Message\RequestMatcher;
 use Http\Message\ResponseFactory;
 use Http\Mock\Client;
-use Psr\Http\Client\ClientExceptionInterface;
+use Http\Client\Exception as ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
