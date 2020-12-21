@@ -14,8 +14,8 @@
 
 Via Composer
 
-``` bash
-$ composer require --dev php-http/mock-client
+```bash
+composer require --dev php-http/mock-client
 ```
 
 
@@ -34,8 +34,8 @@ Please see the [mock client](http://docs.php-http.org/en/latest/clients/mock-cli
 
 ## Testing
 
-``` bash
-$ composer test
+```bash
+composer test
 ```
 
 
