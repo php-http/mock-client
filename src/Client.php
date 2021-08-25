@@ -3,7 +3,6 @@
 namespace Http\Mock;
 
 use Http\Client\Common\HttpAsyncClientEmulator;
-use Http\Client\Common\VersionBridgeClient;
 use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -26,7 +25,6 @@ use Psr\Http\Message\ResponseInterface;
 class Client implements HttpClient, HttpAsyncClient
 {
     use HttpAsyncClientEmulator;
-    use VersionBridgeClient;
 
     /**
      * @var ResponseFactory|ResponseFactoryInterface
@@ -78,9 +76,15 @@ class Client implements HttpClient, HttpAsyncClient
     }
 
     /**
-     * {@inheritdoc}
+     * Respond with the prepared behaviour, in the following order.
+     *
+     * - Throw the next exception in the list and advance
+     * - Return the next response in the list and advance
+     * - Throw the default exception if set (forever)
+     * - Return the default response if set (forever)
+     * - Create a new empty response with the response factory
      */
-    public function doSendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): ResponseInterface
     {
         $this->requests[] = $request;
 
