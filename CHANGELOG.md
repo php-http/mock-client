@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.0 - 2021-08-25
+
+### Changed
+
+- Provide `psr/http-client-implementation`
+- Drop support for `php-http/httplug: 1.*` to be sure to implement a version of the client interface that implements the PSR.
 
 ## 1.4.1 - 2020-07-14
 
