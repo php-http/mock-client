@@ -188,7 +188,7 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * If both a default exception and a default response are set, the exception will be thrown.
      */
-    public function setDefaultException(\Exception $defaultException = null)
+    public function setDefaultException(?\Exception $defaultException)
     {
         if (null !== $defaultException && !$defaultException instanceof Exception) {
             @trigger_error('Clients may only throw exceptions of type '.Exception::class.'. Setting an exception of class '.get_class($defaultException).' will not be possible anymore in the future', E_USER_DEPRECATED);
@@ -207,7 +207,7 @@ class Client implements HttpClient, HttpAsyncClient
     /**
      * Sets the default response to be returned when the list of added exceptions and responses is exhausted.
      */
-    public function setDefaultResponse(ResponseInterface $defaultResponse = null)
+    public function setDefaultResponse(?ResponseInterface $defaultResponse)
     {
         $this->defaultResponse = $defaultResponse;
     }
@@ -217,14 +217,14 @@ class Client implements HttpClient, HttpAsyncClient
      *
      * @return RequestInterface[]
      */
-    public function getRequests()
+    public function getRequests(): array
     {
         return $this->requests;
     }
 
-    public function getLastRequest()
+    public function getLastRequest(): ?RequestInterface
     {
-        return end($this->requests);
+        return end($this->requests) ?: null;
     }
 
     public function reset()
