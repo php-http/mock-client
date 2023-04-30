@@ -2,9 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/release/php-http/mock-client.svg?style=flat-square)](https://github.com/php-http/mock-client/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/php-http/mock-client.svg?style=flat-square)](https://travis-ci.org/php-http/mock-client)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/mock-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/mock-client)
-[![Quality Score](https://img.shields.io/scrutinizer/g/php-http/mock-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/mock-client)
+[![Build Status](https://github.com/php-http/mock-client/actions/workflows/tests.yml/badge.svg)](https://github.com/php-http/mock-client/actions/workflows/tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/mock-client.svg?style=flat-square)](https://packagist.org/packages/php-http/mock-client)
 
 **Mock HTTP client**
