@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.5.1 - 2023-04-30
+
+### Added
+
+- Allow `psr/http-message` version 2
+- Build with PHP 8.1 and 8.2
+
 ## 1.5.0 - 2021-08-25
 
 ### Changed
@@ -22,7 +29,7 @@
 ### Changed
 
 - Drop support for PHP 5 and 7.0
-- Consitent implementation of union type checking
+- Consistent implementation of union type checking
 
 ### Fixed
 
