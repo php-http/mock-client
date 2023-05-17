@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.2 - 2023-05-23
+
+### Removed
+
+- Removed dependency on `php-http/message-factory` as the mock client does not use it.
+
 ## 1.5.1 - 2023-04-30
 
 ### Added
