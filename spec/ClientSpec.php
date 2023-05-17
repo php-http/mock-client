@@ -5,16 +5,16 @@ namespace spec\Http\Mock;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Message\RequestMatcher;
-use Http\Message\ResponseFactory;
 use Http\Mock\Client;
 use Http\Client\Exception as ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
 
 class ClientSpec extends ObjectBehavior
 {
-    function let(ResponseFactory $responseFactory)
+    function let(ResponseFactoryInterface $responseFactory)
     {
         $this->beConstructedWith($responseFactory);
     }
@@ -64,7 +64,7 @@ class ClientSpec extends ObjectBehavior
 
     function it_creates_an_empty_response_when_none_is_added(
         RequestInterface $request,
-        ResponseFactory $responseFactory,
+        ResponseFactoryInterface $responseFactory,
         ResponseInterface $response
     ) {
         $responseFactory->createResponse()->willReturn($response);
@@ -88,7 +88,7 @@ class ClientSpec extends ObjectBehavior
     }
 
     function it_reset(
-        ResponseFactory $responseFactory,
+        ResponseFactoryInterface $responseFactory,
         RequestInterface $request,
         ResponseInterface $response,
         ResponseInterface $newResponse
