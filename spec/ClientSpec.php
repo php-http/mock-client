@@ -22,6 +22,9 @@ class ClientSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(Client::class);
+
+        // make sure the client is also instantiable without arguments
+        new Client();
     }
 
     function it_is_an_http_client()

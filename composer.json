@@ -34,7 +34,10 @@
         "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
     },
     "autoload": {
         "psr-4": {
