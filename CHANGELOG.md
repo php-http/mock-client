@@ -1,6 +1,17 @@
 # Change Log
 
-## 1.5.2 - 2023-05-23
+## 1.6.0 - 2023-05-21
+
+### Fixed
+
+- We actually did fallback to the legacy message factory discovery so 1.5.2 is broken.
+  Changed to use PSR 17 factory discovery.
+  If you allow the composer plugin of `php-http/discovery`, things will work out of the box.
+  When disabled and you do not have a PSR-17 factory installed, you will need to explicitly require one, e.g. `nyholm/psr7`.
+
+## 1.5.2 - 2023-05-17
+
+**Broken, use 1.6.0 instead**
 
 ### Removed
 

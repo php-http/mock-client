@@ -6,6 +6,7 @@ use Http\Client\Common\HttpAsyncClientEmulator;
 use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\RequestMatcher;
@@ -73,7 +74,21 @@ class Client implements HttpClient, HttpAsyncClient
             );
         }
 
-        $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
+        if ($responseFactory) {
+            $this->responseFactory = $responseFactory;
+
+            return;
+        }
+        try {
+            $this->responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        } catch (NotFoundException $notFoundException) {
+            try {
+                $this->responseFactory = MessageFactoryDiscovery::find();
+            } catch (NotFoundException $e) {
+                // throw the psr-17 exception to make people install the new way and not the old
+                throw $notFoundException;
+            }
+        }
     }
 
     /**
