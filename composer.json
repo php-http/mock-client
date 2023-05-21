@@ -18,10 +18,10 @@
     "require": {
         "php": "^7.1 || ^8.0",
         "php-http/client-common": "^2.0",
-        "php-http/discovery": "^1.0",
+        "php-http/discovery": "^1.16",
         "php-http/httplug": "^2.0",
         "psr/http-client": "^1.0",
-        "psr/http-factory": "^1.0",
+        "psr/http-factory-implementation": "^1.0",
         "psr/http-message": "^1.0 || ^2.0",
         "symfony/polyfill-php80": "^1.17"
     },
@@ -34,7 +34,10 @@
         "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "autoload": {
         "psr-4": {
