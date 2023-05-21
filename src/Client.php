@@ -7,6 +7,7 @@ use Http\Client\Exception;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\RequestMatcher;
 use Http\Message\ResponseFactory;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -72,7 +73,7 @@ class Client implements HttpClient, HttpAsyncClient
             );
         }
 
-        $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+        $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
     }
 
     /**
